@@ -1,3 +1,4 @@
+
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -48,7 +49,10 @@ app = FastAPI(title="CloudPulse API", version="0.1.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        "https://clause-cloudpulse.vercel.app",
+        "http://localhost:5173",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -60,24 +64,36 @@ def seed_demo_data():
         if db.query(Resource).count() == 0:
             db.add_all([
                 Resource(
-                    name="web-server-01", service="EC2",
-                    region="ap-south-1", utilization=42,
-                    monthly_cost=320, idle=False
+                    name="web-server-01",
+                    service="EC2",
+                    region="ap-south-1",
+                    utilization=42,
+                    monthly_cost=320,
+                    idle=False
                 ),
                 Resource(
-                    name="dev-server-02", service="EC2",
-                    region="ap-south-1", utilization=3,
-                    monthly_cost=180, idle=True
+                    name="dev-server-02",
+                    service="EC2",
+                    region="ap-south-1",
+                    utilization=3,
+                    monthly_cost=180,
+                    idle=True
                 ),
                 Resource(
-                    name="app-storage", service="S3",
-                    region="ap-south-1", utilization=65,
-                    monthly_cost=90, idle=False
+                    name="app-storage",
+                    service="S3",
+                    region="ap-south-1",
+                    utilization=65,
+                    monthly_cost=90,
+                    idle=False
                 ),
                 Resource(
-                    name="test-database", service="RDS",
-                    region="ap-south-1", utilization=8,
-                    monthly_cost=240, idle=False
+                    name="test-database",
+                    service="RDS",
+                    region="ap-south-1",
+                    utilization=8,
+                    monthly_cost=240,
+                    idle=False
                 ),
             ])
 
@@ -128,6 +144,7 @@ def get_overview():
 def get_resources():
     with SessionLocal() as db:
         resources = db.query(Resource).order_by(Resource.id).all()
+
         return [
             {
                 "id": r.id,
@@ -148,6 +165,7 @@ def get_resources():
 def get_budget():
     with SessionLocal() as db:
         budget = db.query(Budget).first()
+
         return {
             "monthly_limit": budget.monthly_limit if budget else 1000
         }
@@ -157,6 +175,7 @@ def get_budget():
 def update_budget(payload: BudgetUpdate):
     with SessionLocal() as db:
         budget = db.query(Budget).first()
+
         if budget is None:
             budget = Budget(monthly_limit=payload.monthly_limit)
             db.add(budget)
@@ -165,4 +184,5 @@ def update_budget(payload: BudgetUpdate):
 
         db.commit()
         db.refresh(budget)
+
         return {"monthly_limit": budget.monthly_limit}
