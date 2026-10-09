@@ -12,7 +12,8 @@ import {
 } from "recharts";
 import "./App.css";
 
-const API = "http://127.0.0.1:8000";
+
+const API = "https://clause-backend-o03s.onrender.com";
 const COLORS = ["#8B7CFF", "#35C8B5", "#F5B85C", "#5BA9FF"];
 
 function money(value) {
