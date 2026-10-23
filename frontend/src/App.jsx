@@ -242,7 +242,7 @@ export default function App() {
         <header className="topbar">
           <div className="breadcrumbs">Workspace <span>/</span> <strong>Overview</strong></div>
           <div className="top-actions">
-            <span className="environment"><span /> Demo environment</span>
+            
             <button className="icon-button" aria-label="Notifications"><Bell size={18} /></button>
             <div className="top-avatar">S</div>
           </div>
