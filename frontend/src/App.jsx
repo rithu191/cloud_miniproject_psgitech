@@ -234,7 +234,7 @@ export default function App() {
 
         <div className="sidebar-bottom">
           <div className="help-card"><CircleHelp size={19} /><div><strong>Need help?</strong><span>Explore your cloud insights</span></div></div>
-          <div className="profile"><div className="profile-avatar">S</div><div><strong>CloudPulse User</strong><span>Administrator</span></div><ChevronDown size={15} /></div>
+          
         </div>
       </aside>
 
@@ -260,7 +260,7 @@ export default function App() {
 
           {error && <div className="error-banner"><AlertTriangle size={18} />{error}</div>}
 
-          <div className="demo-notice"><ShieldCheck size={17} /><span><strong>Demo data</strong> — Sample resource and cost figures. Connect a cloud provider to use live infrastructure data.</span></div>
+          
 
           <section className="kpi-grid">
             <article className="kpi-card"><div className="kpi-top"><span>Total monthly spend</span><span className="kpi-icon purple"><DollarSign size={19} /></span></div>
